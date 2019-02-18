@@ -1,3 +1,7 @@
+var options = {
+    "enable_notifications": true
+}
+
 function log(data) {
     document.getElementById("log").innerHTML = document.getElementById("log").innerHTML + "\n" + data;
 }
@@ -58,7 +62,7 @@ function pauseMedia() {
     if (can_run) {
         log("MusicPaused");
         document.querySelectorAll("[class^=playbackToggle]")[0].click(); // the pause button is weird, hence the custom filter here
-        window.pauseKeyLast= Date.now();
+        window.pauseKeyLast = Date.now();
     }
     else {
         log("RateLimit");
@@ -84,10 +88,10 @@ function keyDownTextField(e) {
 function getMediaInformation() {
     // we have two footers, both are the same, just the first is the one in the default view
     footer = document.querySelectorAll("[class^=footerPlayer]")[0];
-    try{
+    try {
         mediaInformationDiv = footer.querySelectorAll("[class^=mediaInformation]")[0];
     }
-    catch(err){
+    catch (err) {
         // this happens if for some reason the footer isn't present
         return window.getMediaInformation();
     }
@@ -134,7 +138,9 @@ function main() {
     iDiv.className = 'block';
     document.getElementsByTagName('body')[0].appendChild(iDiv);
     document.addEventListener("keydown", keyDownTextField, false);
-    var notifications = setInterval(checkMediaNotification, 1000);
+    if (options['enable_notifications']) {
+        var notifications = setInterval(checkMediaNotification, 1000);
+    }
     log("Running");
 }
 
