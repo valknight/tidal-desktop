@@ -1,0 +1,22 @@
+{
+  "name": "tidal-linux",
+  "version": "0.1.0",
+  "description": "Cross-platform electron app for the Tidal Web Interface",
+  "main": "main.js",
+  "scripts": {
+    "build": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valknight/tidal-desktop.git"
+  },
+  "author": "Val Knight",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valknight/tidal-desktop/issues"
+  },
+  "homepage": "https://github.com/valknight/tidal-desktop#readme",
+  "dependencies": {
+    "nativefier": "^7.6.11"
+  }
+}
