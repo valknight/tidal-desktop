@@ -1,5 +1,3 @@
-document.addEventListener("keydown", keyDownTextField, false);
-
 function log(data) {
     document.getElementById("log").innerHTML = document.getElementById("log").innerHTML + "\n" + data;
 }
@@ -16,11 +14,29 @@ function filterButtons(dataTestTag) {
     return null; // only happens if we don't find a button
 }
 function previousMedia() {
-    filterButtons("previous").click(); // filterButtons returns a dom object of the button we want to click
+    can_run = true
+    if (window.lastKeyLast == undefined) {
+        // do nothing, this is to make sure we don't do the next two
+    } else if ((Date.now() - window.lastKeyLast) <= 200) {
+        can_run = false
+    }
+    if (can_run) {
+        filterButtons("previous").click(); // filterButtons returns a dom object of the button we want to click
+        window.lastKeyLast = Date.now();
+    }
 }
 
 function nextMedia() {
-    filterButtons("next").click();
+    can_run = true
+    if (window.nextKeyLast == undefined) {
+        // do nothing, this is to make sure we don't do the next two
+    } else if ((Date.now() - window.nextKeyLast) <= 200) {
+        can_run = false
+    }
+    if (can_run) {
+        filterButtons("next").click();
+        window.nextKeyLast = Date.now();
+    }
 }
 
 
@@ -33,15 +49,29 @@ function isPlaying() {
 }
 
 function pauseMedia() {
-    document.querySelectorAll("[class^=playbackToggle]")[0].click(); // the pause button is weird, hence the custom filter here
+    can_run = true
+    if (window.pauseKeyLast == undefined) {
+        // do nothing, this is to make sure we don't do the next two
+    } else if ((Date.now() - window.pauseKeyLast) <= 200) {
+        can_run = false
+    }
+    if (can_run) {
+        log("MusicPaused");
+        document.querySelectorAll("[class^=playbackToggle]")[0].click(); // the pause button is weird, hence the custom filter here
+        window.pauseKeyLast= Date.now();
+    }
+    else {
+        log("RateLimit");
+    }
 }
 
 function keyDownTextField(e) {
     var keyCode = e.keyCode;
     var actualKey = String.fromCharCode(keyCode);
     var evtobj = window.event ? event : e;
-    if (actualKey == " " && evtobj.ctrlKey) {
-        pauseMedia();
+    if (actualKey == " " && evtobj.shiftKey) {
+        // pauseMedia();
+        // you can uncomment this if for some reason TIDAL doesn't handle it by itself
     }
     else if (actualKey == "%" && evtobj.ctrlKey) { // control-left gets inputted as shift-% to our interface
         previousMedia();
@@ -54,7 +84,13 @@ function keyDownTextField(e) {
 function getMediaInformation() {
     // we have two footers, both are the same, just the first is the one in the default view
     footer = document.querySelectorAll("[class^=footerPlayer]")[0];
-    mediaInformationDiv = footer.querySelectorAll("[class^=mediaInformation]")[0];
+    try{
+        mediaInformationDiv = footer.querySelectorAll("[class^=mediaInformation]")[0];
+    }
+    catch(err){
+        // this happens if for some reason the footer isn't present
+        return window.getMediaInformation();
+    }
     toReturn = { "title": "Unknown", "artist": "Unknown", "playing_from": "Unknown" }
     // annoyingly, TIDAL don't give us any class for the title, so we just have to iterate over ourselves
     for (var i = 0; i < mediaInformationDiv.childNodes.length; i++) {
@@ -72,14 +108,15 @@ function getMediaInformation() {
 }
 
 function checkMediaNotification() {
-    if(window.previousState==undefined){
+    if (window.previousState == undefined) {
         window.previousState = getMediaInformation();
+        if (window.previousState == undefined) {
+            // we're still having issues getting track information (hidden footer?)
+            // nothing we can really do, so give up?
+            return
+        }
     }
-    log("NOTIFICATION");
     currentState = getMediaInformation();
-    log(currentState);
-    log(currentState['title']);
-    log(window.previousState['title']);
     if (currentState['title'] != window.previousState['title']) { // song change has occurred
         if (isPlaying()) { // we don't want to send a notification if our user isn't listening
             let myNotification = new Notification(currentState['title'], {
@@ -96,6 +133,7 @@ function main() {
     iDiv.style = "display: none";
     iDiv.className = 'block';
     document.getElementsByTagName('body')[0].appendChild(iDiv);
+    document.addEventListener("keydown", keyDownTextField, false);
     var notifications = setInterval(checkMediaNotification, 1000);
     log("Running");
 }

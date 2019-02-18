@@ -4,25 +4,25 @@
     "inputEvents": [
       {
         "type": "keyDown",
-        "keyCode": "Control"
+        "keyCode": "Shift"
       },
       {
         "type": "keyDown",
         "keyCode": "Space",
         "modifiers": [
-          "control"
+          "shift"
         ]
       },
       {
         "type": "keyUp",
         "keyCode": "Space",
         "modifiers": [
-          "control"
+          "shift"
         ]
       },
       {
         "type": "keyUp",
-        "keyCode": "Control"
+        "keyCode": "shift"
       }
     ]
   },
