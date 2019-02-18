@@ -18,7 +18,7 @@ var options = {
     flash: true,
     // we don't provide flash, due to licensing, but, you can find it inside ~/.config/google-chrome/PepperFlash/[version]/libpepflashplayer.so
     // set below to the entire path (not relative)
-    flashPath: "/changeme/libpepflashplayer.so",
+    flashPath: "./libpepflashplayer.so",
     zoom: 1.0,
     singleInstance: true,
     clearCache: false,
