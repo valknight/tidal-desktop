@@ -1,4 +1,4 @@
-# TIDAL for Linux
+# TIDAL for Linux [![Build Status](https://travis-ci.org/valknight/tidal-desktop.svg?branch=master)](https://travis-ci.org/valknight/tidal-desktop)
 
 ![Screenshot](https://i.imgur.com/jbOdW8a.png)
 
