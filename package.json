@@ -4,7 +4,8 @@
   "description": "Cross-platform electron app for the Tidal Web Interface",
   "main": "main.js",
   "scripts": {
-    "build": "node main.js"
+    "build": "node main.js",
+    "test": "jshint main.js && jshint custom.js && node main.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/valknight/tidal-desktop#readme",
   "dependencies": {
     "colors": "^1.3.3",
+    "jshint": "^2.10.1",
     "nativefier": "^7.6.11"
   }
 }
