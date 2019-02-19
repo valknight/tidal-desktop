@@ -1,12 +1,16 @@
 # TIDAL for Linux
 
+![Screenshot](https://i.imgur.com/jbOdW8a.png)
+
 ## What is this?
 
 This is a wrapper for TIDAL's web app, using Nativfier, which injects custom code to provide for a better desktop experience. It adds the following features to TIDAL:
 
 - Close to tray
-- Desktop Notifications
 - Global keyboard shortcuts (by default, bound to media keys)
+- Desktop Notifications
+
+![Notifications Demo](https://i.imgur.com/s3ruu5t.png)
 
 ## Installation
 
@@ -32,6 +36,15 @@ Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `
 5. Run `npm run build`
 6. Change directory to `build/tidal-linux-x64` and run `./tidal` - note, your working directory *has* to contain libpepflashplayer, so if you're making custom launchers, ensure this is set up right
 
+### Default key bindings
+
+**Media Play/Pause** = Play/Pause in TIDAL
+
+**Media Forward** = Forward in TIDAL
+
+**Media Back** = Back in TIDAL
+
+If you wish to change these, see below in the FAQ as to how.
 ### FAQ
 
 #### Why Electron!? Electron is garbage! I want a native app!
@@ -40,11 +53,11 @@ To be honest, same, but, I don't have the time (this entire thing took about an 
 
 #### Can I disable notifications?
 
-Not through an option in the interface, no. However, you can open up `resources/app/inject/inject.js`, and change the option `enable_notifications` to `False`. If you want this to be persitant across builds, change this in `custom.js`.
+Not through an option in the interface, no. However, you can open up `resources/app/inject/inject.js`, and change the option `enable_notifications` to `False`. If you want this to be persistent across builds, change this in `custom.js`.
 
 #### How do I change the shortcuts from media keys?
 
-If you want to change the keyboard shortcuts, open up `resources/app/nativefier.json`, and scroll down to `"globalShortcuts"`, and modify it as needed. Make sure you only change `"key"` not `"inputEvents"`, or your keys will fail to register inside TIDAL. Once you've done this, run `npm run build`, and the new binary will use your new keybinds.
+If you want to change the keyboard shortcuts, open up `resources/app/nativefier.json`, and scroll down to `"globalShortcuts"`, and modify it as needed. Make sure you only change `"key"` not `"inputEvents"`, or your keys will fail to register inside TIDAL. To make this persistent across new builds, instead modify `shortcuts.json`, and run `npm run build` - the new binary will use your new keybinds.
 
 #### What's libpepflashplayer.so?
 
