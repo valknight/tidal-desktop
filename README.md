@@ -29,12 +29,11 @@ Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `
 
 > This has been tested on Ubuntu 18.04.2 LTS - general steps will be the same, however the path of libpepflashplayer may change
 
-1. Open up Chrome, and head to `chrome://components`. Click "Check for update" under Adobe Flash Player
-2. Clone / download this repository
-3. Open up a terminal in said directory
-4. Change directory to this project, and type `npm install`
-5. Run `npm run build`
-6. Change directory to `build/tidal-linux-x64` and run `./tidal` - note, your working directory *has* to contain libpepflashplayer, so if you're making custom launchers, ensure this is set up right
+1. Clone / download this repository
+2. Open up a terminal in said directory
+3. Change directory to this project, and type `npm install`
+4. Run `npm run build`
+5. Change directory to `build/tidal-linux-x64` and run `./tidal` - note, your working directory *has* to contain libpepflashplayer, so if you're making custom launchers, ensure this is set up right
 
 ### Default key bindings
 
