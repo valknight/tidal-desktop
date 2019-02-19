@@ -36,8 +36,8 @@ nativefier(options, function(error, appPath) {
     }
     fs.copyFile('./libpepflashplayer.so', './'+appPath+'/libpepflashplayer.so', function(error) {
         if(error) {
-            if(error['code']=='ENOENT'){
-                console.log("Could not copy libpepflashplayer.so : Is libpepflashplayer.so in the current directory?".bold.red)
+            if(error.code=='ENOENT'){
+                console.log("Could not copy libpepflashplayer.so : Is libpepflashplayer.so in the current directory?".bold.red);
             }
             else {
                 throw error;
@@ -48,12 +48,12 @@ nativefier(options, function(error, appPath) {
             // we now need to ensure that nativefier.json is set right (sometimes the name option doesn't pass correctly)
             var rawdata = fs.readFileSync(appPath+'/resources/app/nativefier.json');  
             var packageData = JSON.parse(rawdata);
-            packageData['name'] = "TIDAL";
+            packageData.name = "TIDAL";
             // parts of our README ask people to change this file, so indenting it is polite
             var to_write = JSON.stringify(packageData, null, 4); 
             fs.writeFile(appPath+'/resources/app/nativefier.json', to_write, function(error) {
                 if(error) throw error;
-            })
+            });
             console.log(("TIDAL is ready to start. cd to \""+appPath+"\", and run ./tidal").bold.green);
         }
     });
