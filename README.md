@@ -20,7 +20,6 @@ Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `
 
 - Node
 - NPM
-- Google Chrome (we need this for libpepflashplayer, as TIDAL requires Flash to be active when running in Nativfier)
 
 #### Procedure
 
@@ -29,11 +28,9 @@ Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `
 1. Open up Chrome, and head to `chrome://components`. Click "Check for update" under Adobe Flash Player
 2. Clone / download this repository
 3. Open up a terminal in said directory
-4. Type `cd ~/.config/google-chrome/PepperFlash/`
-5. Go into the highest version you've got, and copy `libpepflashplayer.so` to where you extracted this project
-6. Change directory to this project, and type `npm install`
-7. Run `npm run build`
-8. Change directory to `build/tidal-linux-x64` and run `./tidal` - note, your working directory *has* to contain libpepflashplayer, so if you're making custom launchers, ensure this is set up right
+4. Change directory to this project, and type `npm install`
+5. Run `npm run build`
+6. Change directory to `build/tidal-linux-x64` and run `./tidal` - note, your working directory *has* to contain libpepflashplayer, so if you're making custom launchers, ensure this is set up right
 
 ### FAQ
 
@@ -49,9 +46,9 @@ Not through an option in the interface, no. However, you can open up `resources/
 
 If you want to change the keyboard shortcuts, open up `resources/app/nativefier.json`, and scroll down to `"globalShortcuts"`, and modify it as needed. Make sure you only change `"key"` not `"inputEvents"`, or your keys will fail to register inside TIDAL. Once you've done this, run `npm run build`, and the new binary will use your new keybinds.
 
-#### Why Flash?
+#### What's libpepflashplayer.so?
 
-TIDAL either wants to use HTML5 powered DRM, or if that's not avaliable, it does it in Flash. Therefore, I *think* this is to do with DRM, but, I'm not entirely sure. However, the workaround seems to work, and if you remove it, you get a message from TIDAL asking you to install Flash, or install their desktop app (a sick joke tbh).
+TIDAL either wants to use HTML5 powered DRM, or if that's not avaliable, it does it in Flash. Therefore, we include `libpepflashplayer.so` (the flash player binary provided by Google Chrome). By including it, the workaround of using Flash seems to work, and if you remove it, you get a message from TIDAL asking you to install Flash, or install their desktop app (a sick joke tbh). The only condition of this is that it means libpepflashplayer.so needs to be in the working directory when launching TIDAL (so, no `build/tidal-linux-x64`, it's `cd build/tidal-linux-x64 && ./tidal`). 
 
 #### Why am I still getting the *no Flash* popup?
 
