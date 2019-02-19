@@ -38,7 +38,9 @@ Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `
 ### Default key bindings
 
 **Media Play/Pause** = Play/Pause in TIDAL
+
 **Media Forward** = Forward in TIDAL
+
 **Media Back** = Back in TIDAL
 
 If you wish to change these, see below in the FAQ as to how.
