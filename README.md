@@ -12,7 +12,7 @@ This is a wrapper for TIDAL's web app, using Nativfier, which injects custom cod
 
 ### From binary
 
-Go to the releases tab, and download the latest `tar.gz` file. Extract it, run `chmod +x tidal`, and then you can run `tidal`.
+Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `chmod +x tidal`, and then you can run `tidal`.
 
 ### From source
 
@@ -33,7 +33,7 @@ Go to the releases tab, and download the latest `tar.gz` file. Extract it, run `
 5. Go into the highest version you've got, and copy `libpepflashplayer.so` to where you extracted this project
 6. Change directory to this project, and type `npm install`
 7. Run `npm run build`
-8. Your TIDAL executable should be built at `build/tidal-linux-x64/tidal`.
+8. Change directory to `build/tidal-linux-x64` and run `./tidal` - note, your working directory *has* to contain libpepflashplayer, so if you're making custom launchers, ensure this is set up right
 
 ### FAQ
 
@@ -43,11 +43,11 @@ To be honest, same, but, I don't have the time (this entire thing took about an 
 
 #### Can I disable notifications?
 
-Not through an option in the interface, no. However, you can open up custom.js, and change the option `enable_notifications` to `False`, and run `npm run build` to rebuild the app.
+Not through an option in the interface, no. However, you can open up `resources/app/inject/inject.js`, and change the option `enable_notifications` to `False`. If you want this to be persitant across builds, change this in `custom.js`.
 
 #### How do I change the shortcuts from media keys?
 
-If you want to change the keyboard shortcuts, open up shortcuts.json, and modify it as needed. Make sure you only change `"key"` not `"inputEvents"`, or your keys will fail to register inside TIDAL. Once you've done this, run `npm run build`, and the new binary will use your new keybinds.
+If you want to change the keyboard shortcuts, open up `resources/app/nativefier.json`, and scroll down to `"globalShortcuts"`, and modify it as needed. Make sure you only change `"key"` not `"inputEvents"`, or your keys will fail to register inside TIDAL. Once you've done this, run `npm run build`, and the new binary will use your new keybinds.
 
 #### Why Flash?
 
