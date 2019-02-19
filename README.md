@@ -1,12 +1,16 @@
 # TIDAL for Linux
 
+![Screenshot](https://i.imgur.com/jbOdW8a.png)
+
 ## What is this?
 
 This is a wrapper for TIDAL's web app, using Nativfier, which injects custom code to provide for a better desktop experience. It adds the following features to TIDAL:
 
 - Close to tray
-- Desktop Notifications
 - Global keyboard shortcuts (by default, bound to media keys)
+- Desktop Notifications
+
+![Notifications Demo](https://i.imgur.com/s3ruu5t.png)
 
 ## Installation
 
