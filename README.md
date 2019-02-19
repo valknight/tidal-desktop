@@ -27,7 +27,7 @@ Go to the releases tab, and download the latest `tar.xz` file. Extract it, run `
 
 #### Procedure
 
-> This has been tested on Ubuntu 18.04.2 LTS - general steps will be the same, however the path of libpepflashplayer may change
+> This has been tested on Ubuntu 18.04.2 LTS AMD64- your system may vary
 
 1. Clone / download this repository
 2. Open up a terminal in said directory
