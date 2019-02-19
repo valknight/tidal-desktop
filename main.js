@@ -40,7 +40,7 @@ nativefier(options, function(error, appPath) {
                 console.log("Could not copy libpepflashplayer.so : Is libpepflashplayer.so in the current directory?".bold.red)
             }
             else {
-                console.log(error.red);
+                throw error;
             }
             return;
         }
@@ -54,7 +54,7 @@ nativefier(options, function(error, appPath) {
             fs.writeFile(appPath+'/resources/app/nativefier.json', to_write, function(error) {
                 if(error) throw error;
             })
-            console.log(("TIDAL is ready to start. cd to \""+appPath+"\", and run ./tidal").bold.green)
+            console.log(("TIDAL is ready to start. cd to \""+appPath+"\", and run ./tidal").bold.green);
         }
     });
 });
