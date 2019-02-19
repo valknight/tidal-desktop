@@ -1,6 +1,6 @@
 var options = {
     "enable_notifications": true
-}
+};
 
 function log(data) {
     document.getElementById("log").innerHTML = document.getElementById("log").innerHTML + "\n" + data;
@@ -18,11 +18,11 @@ function filterButtons(dataTestTag) {
     return null; // only happens if we don't find a button
 }
 function previousMedia() {
-    can_run = true
+    can_run = true;
     if (window.lastKeyLast == undefined) {
         // do nothing, this is to make sure we don't do the next two
     } else if ((Date.now() - window.lastKeyLast) <= 200) {
-        can_run = false
+        can_run = false;
     }
     if (can_run) {
         filterButtons("previous").click(); // filterButtons returns a dom object of the button we want to click
@@ -31,11 +31,11 @@ function previousMedia() {
 }
 
 function nextMedia() {
-    can_run = true
+    can_run = true;
     if (window.nextKeyLast == undefined) {
         // do nothing, this is to make sure we don't do the next two
     } else if ((Date.now() - window.nextKeyLast) <= 200) {
-        can_run = false
+        can_run = false;
     }
     if (can_run) {
         filterButtons("next").click();
@@ -53,11 +53,11 @@ function isPlaying() {
 }
 
 function pauseMedia() {
-    can_run = true
+    can_run = true;
     if (window.pauseKeyLast == undefined) {
         // do nothing, this is to make sure we don't do the next two
     } else if ((Date.now() - window.pauseKeyLast) <= 200) {
-        can_run = false
+        can_run = false;
     }
     if (can_run) {
         log("MusicPaused");
@@ -95,20 +95,20 @@ function getMediaInformation() {
         // this happens if for some reason the footer isn't present
         return window.getMediaInformation();
     }
-    toReturn = { "title": "Unknown", "artist": "Unknown", "playing_from": "Unknown" }
+    toReturn = { "title": "Unknown", "artist": "Unknown", "playing_from": "Unknown" };
     // annoyingly, TIDAL don't give us any class for the title, so we just have to iterate over ourselves
     for (var i = 0; i < mediaInformationDiv.childNodes.length; i++) {
         if (mediaInformationDiv.childNodes[i].attributes['data-test'] != undefined) {
             if (mediaInformationDiv.childNodes[i].attributes['data-test'].value == "footer-track-title") {
                 // this means current child has the track title
-                toReturn['title'] = mediaInformationDiv.childNodes[i].textContent;
+                toReturn.title = mediaInformationDiv.childNodes[i].textContent;
             }
         }
     }
-    toReturn['artist'] = mediaInformationDiv.querySelectorAll("[class^=mediaArtists]")[0].textContent;
+    toReturn.artist = mediaInformationDiv.querySelectorAll("[class^=mediaArtists]")[0].textContent;
     // this chaos is because TIDAL handily split the player into "Playing from" and the actual playlist
-    toReturn['playing_from'] = mediaInformationDiv.childNodes[2].querySelectorAll("[class^=text]")[0].textContent;
-    return toReturn
+    toReturn.playing_from = mediaInformationDiv.childNodes[2].querySelectorAll("[class^=text]")[0].textContent;
+    return toReturn;
 }
 
 function checkMediaNotification() {
@@ -117,15 +117,15 @@ function checkMediaNotification() {
         if (window.previousState == undefined) {
             // we're still having issues getting track information (hidden footer?)
             // nothing we can really do, so give up?
-            return
+            return;
         }
     }
     currentState = getMediaInformation();
-    if (currentState['title'] != window.previousState['title']) { // song change has occurred
+    if (currentState.title != window.previousState.title) { // song change has occurred
         if (isPlaying()) { // we don't want to send a notification if our user isn't listening
-            let myNotification = new Notification(currentState['title'], {
-                body: currentState['artist']
-            })
+            new Notification(currentState.title, {
+                body: currentState.artist
+            });
         }
     }
     window.previousState = currentState;
@@ -138,7 +138,7 @@ function main() {
     iDiv.className = 'block';
     document.getElementsByTagName('body')[0].appendChild(iDiv);
     document.addEventListener("keydown", keyDownTextField, false);
-    if (options['enable_notifications']) {
+    if (options.enable_notifications) {
         var notifications = setInterval(checkMediaNotification, 1000);
     }
     log("Running");
