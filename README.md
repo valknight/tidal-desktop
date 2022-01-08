@@ -1,3 +1,7 @@
+# No longer maintained
+
+Hiya all! I no longer maintain this. [However, rippin93 has a fork of this software which people report success with. Go check it out!](https://github.com/rippin93/tidal-desktop)
+
 # TIDAL for Linux [![Build Status](https://travis-ci.org/valknight/tidal-desktop.svg?branch=master)](https://travis-ci.org/valknight/tidal-desktop)
 
 ![Screenshot](https://i.imgur.com/jbOdW8a.png)
